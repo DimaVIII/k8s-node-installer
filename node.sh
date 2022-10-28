@@ -7,8 +7,8 @@
 # Vars
 K8S_VERSION="1.25.3-00"
 
-# Update-Upgrade
-apt update -y && apt upgrade -y
+# Update
+apt update -y
 
 # Tools
 apt install -y tree jq net-tools fping ntp
