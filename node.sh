@@ -71,10 +71,7 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/conf
 sudo systemctl enable containerd
 sudo systemctl restart containerd
 
-crictl config runtime-endpoint unix:///var/run/containerd/containerd.sock
-
 # Install Kubeadm + Kubelet + Kubectl
-
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https ca-certificates curl
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -85,6 +82,9 @@ sudo apt-get update -y
 sudo apt install -y kubeadm=$K8S_VERSION kubelet=$K8S_VERSION  kubectl=$K8S_VERSION
 
 sudo apt-mark hold kubelet kubeadm kubectl
+
+# Fix crictl warning
+/usr/bin/crictl config runtime-endpoint unix:///var/run/containerd/containerd.sock
 
 echo '\nKubernetes installation done!'
 
