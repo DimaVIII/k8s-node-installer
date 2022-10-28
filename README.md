@@ -6,7 +6,7 @@ Currrent K8S_VERSION="1.25.3-00"
 
 ## Install
 ```bash
-curl | sudo sh
+curl https://raw.githubusercontent.com/DimaVIII/k8s-node-installer/main/node.sh | sudo sh
 ```
 
 ## Set Hostname
