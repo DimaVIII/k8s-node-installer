@@ -11,9 +11,11 @@ K8S_VERSION="1.25.3-00"
 apt update -y
 
 # Tools
-apt install -y tree jq net-tools fping ntp
+apt install -y tree jq net-tools fping systemd-timesyncd nano
 
 # Set time sync
+systemctl enable systemd-timesyncd.service
+systemctl start systemd-timesyncd.service
 sudo timedatectl set-ntp on
 
 # Swap off
@@ -85,6 +87,32 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 # Fix crictl warning
 /usr/bin/crictl config runtime-endpoint unix:///var/run/containerd/containerd.sock
+
+#TODO: Firewall
+#ufw enable
+#or
+#iptables
+
+# Add alias for kubectl
+cat <<EOF >> /root/.bashrc
+## Kubernetes - K8S
+alias k="kubectl"
+alias kg="kubectl -o wide get"
+alias kga="kubectl get all -o wide"
+alias kgaa="kubectl get all -o wide -A"
+alias kgp="kubectl get po -o wide"
+alias kgpa="kubectl get po -o wide -A"
+
+alias kgpm="kubectl get pod -o wide -n monitoring"
+alias kgam="kubectl get all -o wide -n monitoring"
+
+source <(kubectl completion bash)
+complete -o default -F __start_kubectl k
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+EOF
 
 echo '\nKubernetes installation done!'
 
