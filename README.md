@@ -72,3 +72,13 @@ kubectl get nodes -o yaml | grep -i podcidr
 // Verify projectcalico.org/IPv4Address is the public IP of the node
 kubectl get nodes -o yaml
 ```
+
+## Setup Kubernetes Metrics Server
+```
+kubectl apply -f https://raw.githubusercontent.com/scriptcamp/kubeadm-scripts/main/manifests/metrics-server.yaml
+```
+
+// gives you
+```
+kubectl top nodes
+```
