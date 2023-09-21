@@ -4,6 +4,11 @@ Created on 28-Oct-2022
 
 Currrent K8S_VERSION="1.25.3-00"
 
+# Only Docker Installer
+```bash
+curl https://raw.githubusercontent.com/DimaVIII/k8s-node-installer/main/docker.sh | sudo sh
+```
+
 # Prepare the node
 
 ## Set Hostname
